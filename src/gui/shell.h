@@ -9,8 +9,10 @@
 #include <QTimer>
 #include <QUrl>
 #include <QList>
+#include <QMenu>
 #include "neovimconnector.h"
 #include "shellwidget/shellwidget.h"
+#include "popupmenu.h"
 
 namespace NeovimQt {
 
@@ -116,6 +118,9 @@ protected:
 	virtual void handleSetScrollRegion(const QVariantList& opargs);
 	virtual void handleBusy(bool);
 	virtual void handleSetOption(const QString& name, const QVariant& value);
+	virtual void handlePopupMenuShow(const QVariantList& items, int64_t selected,
+			int64_t row, int64_t col);
+	void handlePopupMenuSelect(int64_t selected);
 
 	void neovimMouseEvent(QMouseEvent *ev);
 	virtual void mousePressEvent(QMouseEvent *ev) Q_DECL_OVERRIDE;
@@ -159,6 +164,7 @@ private:
 	// Properties
 	bool m_neovimBusy;
 	ShellOptions m_options;
+	PopupMenu m_pum;
 };
 
 } // Namespace
